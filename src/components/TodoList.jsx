@@ -55,6 +55,7 @@ const TodoList = () => {
       </Typography>
       <form onSubmit={handleSubmit}>
         <TextField
+          type="search"
           id="standard-basic"
           label="Ingrese aqui una tarea"
           variant="standard"
