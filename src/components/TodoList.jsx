@@ -27,7 +27,7 @@ const TodoList = () => {
   //Funcion que agrega lo escrito, a la lista.
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (inputValue === "") return;
+    if (inputValue.trim() === "") return;
     //Creamos un objeto "todo", con el id de una fecha, y el nombre del valor del input
     setList([{ id: new Date().getTime(), ...todo }, ...list]);
     setInputValue("");
