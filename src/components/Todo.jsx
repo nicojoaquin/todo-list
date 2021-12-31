@@ -1,7 +1,13 @@
-import { IconButton, ListItem, ListItemText } from "@mui/material";
+import {
+  Checkbox,
+  IconButton,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+} from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-const Todo = ({ id, name, handleDelete }) => {
+const Todo = ({ id, name, finished, handleCheck, handleDelete }) => {
   return (
     <ListItem
       secondaryAction={
@@ -14,7 +20,15 @@ const Todo = ({ id, name, handleDelete }) => {
         </IconButton>
       }
     >
-      <ListItemText primary={name} />
+      <ListItemText primary={name} secondary={finished && "Terminada"} />
+      <ListItemIcon>
+        <Checkbox
+          edge="start"
+          checked={finished}
+          disableRipple
+          onChange={() => handleCheck(id)}
+        />
+      </ListItemIcon>
     </ListItem>
   );
 };

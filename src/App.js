@@ -3,11 +3,9 @@ import TodoList from "./components/TodoList"
 
 const App = () => {
   return (
-    <>
-      <Container fixed>
-        <TodoList />
-      </Container>
-    </>
+    <Container>
+      <TodoList />
+    </Container>
   )
 }
 
