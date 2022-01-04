@@ -24,6 +24,7 @@ const ModalForm = ({ handleEdit, handleClose, open, active }) => {
 
   const onEdit = (e) => {
     e.preventDefault();
+    if (inputValue.trim() === "") return;
     handleEdit(active, inputValue);
     handleClose();
     setInputValue("");
