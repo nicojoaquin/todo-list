@@ -21,6 +21,7 @@ const Todo = ({
 }) => {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState({});
+  const [inputValue, setInputValue] = useState("");
 
   const handleOpen = () => setOpen(true);
 
@@ -31,7 +32,16 @@ const Todo = ({
 
   const editing = () => {
     handleOpen();
+    setInputValue(name);
     setActive(todo);
+  };
+
+  const onEdit = (e) => {
+    e.preventDefault();
+    if (inputValue.trim() === "") return;
+    handleEdit(active, inputValue);
+    handleClose();
+    setInputValue("");
   };
 
   return (
@@ -65,8 +75,9 @@ const Todo = ({
       <ModalForm
         handleClose={handleClose}
         open={open}
-        handleEdit={handleEdit}
-        active={active}
+        onEdit={onEdit}
+        inputValue={inputValue}
+        setInputValue={setInputValue}
       />
     </>
   );

@@ -1,7 +1,6 @@
 import { Modal, TextField } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { Box } from "@mui/system";
-import { useState } from "react";
 
 const useStyles = makeStyles({
   modal: {
@@ -18,17 +17,14 @@ const useStyles = makeStyles({
   },
 });
 
-const ModalForm = ({ handleEdit, handleClose, open, active }) => {
+const ModalForm = ({
+  onEdit,
+  inputValue,
+  setInputValue,
+  handleClose,
+  open,
+}) => {
   const styles = useStyles();
-  const [inputValue, setInputValue] = useState("");
-
-  const onEdit = (e) => {
-    e.preventDefault();
-    if (inputValue.trim() === "") return;
-    handleEdit(active, inputValue);
-    handleClose();
-    setInputValue("");
-  };
 
   return (
     <Modal
