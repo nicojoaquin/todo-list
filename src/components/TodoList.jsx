@@ -18,19 +18,13 @@ const TodoList = () => {
   //Agrego lo que escribo en el input, a un estado.
   const handleInputValue = ({ target }) => setInputValue(target.value);
 
-  //Objeto de la tarea
-  const todo = {
-    name: inputValue,
-    finished: false,
-  };
-
-  //Funcion que agrega lo escrito, a la lista.
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (inputValue.trim() === "") return;
+  const handleAdd = (todoName) => {
+    const todo = {
+      name: todoName,
+      finished: false,
+    };
     //Creamos un objeto "todo", con el id de una fecha, y el nombre del valor del input
     setList([{ id: new Date().getTime(), ...todo }, ...list]);
-    setInputValue("");
   };
 
   //Cambia el estado de la tarea entre finalizada o no
@@ -44,9 +38,25 @@ const TodoList = () => {
     );
   };
 
+  const handleEdit = (active, newTodo) => {
+    setList(
+      list.map((listItem) =>
+        listItem.id === active.id ? { ...listItem, name: newTodo } : listItem
+      )
+    );
+  };
+
   //Elimino con un filter la tarea
   const handleDelete = (id) =>
     setList(list.filter((listItem) => listItem.id !== id));
+
+  //Funcion que agrega lo escrito, a la lista.
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (inputValue.trim() === "") return;
+    handleAdd(inputValue);
+    setInputValue("");
+  };
 
   return (
     <>
@@ -82,7 +92,9 @@ const TodoList = () => {
                 <Todo
                   key={todo.id}
                   {...todo}
+                  todo={todo}
                   handleCheck={handleCheck}
+                  handleEdit={handleEdit}
                   handleDelete={handleDelete}
                 />
               ))}
